@@ -6,7 +6,7 @@ Broken program to determine score status
 # TODO: Fix this!
 
 
-"""score = int(input("Enter score: "))
+score = int(input("Enter score: "))
 # if score < 0:
 #     print("Invalid score")
 # else:
@@ -30,30 +30,5 @@ elif score >= 50:
 else:
     # print("Bad")
     message = "Bad"
-print(message)"""
-import random
+print(message)
 
-
-def main():
-    score = int(input("Enter score: "))
-    message = determine_message(score)
-    print(message)
-    score = random.randint(0, 100)
-    print(f"Random score: {score}")
-    message = determine_message(score)
-    print(message)
-
-
-def determine_message(score):
-    if score > 100 or score < 0:
-        message = "Invalid input"
-    elif score >= 90:
-        message = "Excellent"
-    elif score >= 50:
-        message = "Passable"
-    else:
-        message = "Bad"
-    return message
-
-
-main()
