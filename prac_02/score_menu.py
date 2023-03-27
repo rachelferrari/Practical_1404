@@ -7,7 +7,7 @@ MENU = """(G)et a valid score
 
 def main():
     print(MENU)
-    choice = get_valid_choice()
+    choice = input(">>> ").upper()
     while choice != 'Q':
         if choice == 'G':
             score = get_valid_score()
@@ -20,15 +20,12 @@ def main():
         else:
             print("Invalid input")
         print(MENU)
-        choice = get_valid_choice()
+        choice = input(">>> ").upper()
     print("Farewell")
 
 
-def get_valid_choice():
-    return input(">>> ").upper()
-
-
 def get_valid_score():
+    """Get valid score"""
     score = int(input('Enter score: '))
     while score > 100 or score < 0:
         print("Invalid input")
@@ -37,6 +34,7 @@ def get_valid_score():
 
 
 def determine_message(score):
+    """Determine message upon inputted score"""
     if score > 100 or score < 0:
         message = "Invalid input"
     elif score >= 90:
@@ -49,6 +47,7 @@ def determine_message(score):
 
 
 def print_asterisk(score):
+    """Print amount of asterisk(s) according to score"""
     for i in range(score):
         print('*', end='')
 

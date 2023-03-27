@@ -12,29 +12,28 @@
 
 
 def main():
-    password = get_valid_password()
-    length_of_password = len(password)
-    while password != '':
-        if length_of_password > 6:
-            return print_asterisk(length_of_password)
-        else:
-            print("Try again")
-            password = get_valid_password()
-            length_of_password = len(password)
+    length_of_password = get_valid_password()
+    print_asterisk(length_of_password)
+
 
 
 def print_asterisk(length_of_password):
+    """Print asterisks to length of password"""
     for i in range(length_of_password):
         print('*', end='')
-    return
 
 
 def get_valid_password():
+    """Get valid password"""
     password = input("Password: ")
-    while password == '':
-        print("Invalid input")
-        password = input("Password: ")
-    return password
+    length_of_password = len(password)
+    while password != '':
+        if length_of_password >= 6:
+            return length_of_password
+        else:
+            print("Try again")
+            password = input("Password: ")
+            length_of_password = len(password)
 
 
 
