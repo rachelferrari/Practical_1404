@@ -10,9 +10,9 @@ LOW_PERCENTAGE = 0.10
 
 sales = float(input("Enter sales: $"))
 while sales >= VALIDITY_THRESHOLD:
-    if sales >= HIGH_BONUS_THRESHOLD:
-        user_bonus = sales * HIGH_PERCENTAGE
-    else:
+    if sales < HIGH_BONUS_THRESHOLD:
         user_bonus = sales * LOW_PERCENTAGE
+    else:
+        user_bonus = sales * HIGH_PERCENTAGE
     print(user_bonus)
     sales = float(input("Enter sales: $"))
