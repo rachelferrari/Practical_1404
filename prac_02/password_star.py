@@ -16,7 +16,6 @@ def main():
     print_asterisk(length_of_password)
 
 
-
 def print_asterisk(length_of_password):
     """Print asterisks to length of password"""
     for i in range(length_of_password):
@@ -34,8 +33,6 @@ def get_valid_password():
             print("Try again")
             password = input("Password: ")
             length_of_password = len(password)
-
-
 
 
 main()
