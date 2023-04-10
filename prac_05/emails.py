@@ -1,7 +1,7 @@
 """
 Emails
 Estimated: 45 minutes
-Actual:
+Actual: 28 minutes
 """
 name_to_email = {}
 
@@ -11,12 +11,8 @@ while email != '':
     name = ' '.join(emails[0].split('.')).title()
     answer = input(f"Is your name {name}? (Y/n) ")
     while answer != '' and answer != 'y':
-        if answer == 'n' or answer == 'no':
-            name = input("Name: ").title()
-            answer = 'y'
-        else:
-            print("Invalid input")
-            answer = input(f"Is your name {name}? (Y/n) ")
+        name = input("Name: ").title()
+        answer = 'y'
     name_to_email[name] = email
     email = input("Email: ")
 for name, email in name_to_email.items():
