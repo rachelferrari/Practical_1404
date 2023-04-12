@@ -1,7 +1,7 @@
 """
 Game, Set Match
 Estimated: 1 hr 15 minutes
-Actual:
+Actual: 57 minutes
 """
 FILENAME = "../wimbledon.csv"
 
@@ -10,6 +10,8 @@ def main():
     """Shows processed information of the files"""
     data = open_file()
     show_champions_and_wins(data)
+    print()
+    show_countries(data)
 
 
 def open_file():
@@ -32,5 +34,13 @@ def show_champions_and_wins(data):
         print(f"{winner} {win}")
 
 
-main()
+def show_countries(data):
+    """Show countries that have won"""
+    countries = set()
+    for i in range(1, len(data)):
+        countries.add(data[i][1])
+    print(f"These {len(countries)} countries have won Wimbledon:")
+    print(', '.join(sorted(countries)))
 
+
+main()
