@@ -7,7 +7,7 @@ FILENAME = "../wimbledon.csv"
 
 
 def main():
-    """Shows processed information of the files"""
+    """Shows processed information of the file"""
     data = open_file()
     show_champions_and_wins(data)
     print()
