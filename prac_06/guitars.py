@@ -1,4 +1,4 @@
-from prac_06.guitar import Guitar
+from guitar import Guitar
 
 CURRENT_YEAR = 2022
 guitars = []
