@@ -1,6 +1,6 @@
 """Project Management Program
 Estimated: 2 hr
-Actual:
+Actual: 5 hr 30 min
 """
 from project import Project
 import datetime
@@ -9,6 +9,7 @@ MENU = "- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter p
 
 
 def main():
+    """Show choices for the project management software"""
     projects = []
     texts = []
     print(MENU)
@@ -34,7 +35,7 @@ def main():
 
 
 def update_project(projects, texts):
-    """update project"""
+    """Update project details"""
     count = 0
     for line in projects:
         print(f"{count} {line}")
@@ -63,30 +64,74 @@ def update_project(projects, texts):
 
 
 def add_project(projects, texts):
-    """Add project"""
+    """Add new project into the program"""
     print("Let's add a new project")
-    name = input("Name: ")
-    date_string = input("Date (d/m/yyyy): ")
-    priority = int(input("Priority: "))
-    cost = float(input("Cost estimate: $"))
-    completion = int(input("Percent complete: "))
-    parts = [name, date_string, priority, cost, completion]
-    texts.append(parts)
-    project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
-    projects.append(project)
+    name = get_valid_input("Name: ")
+    correct_date = False
+    while not correct_date:
+        try:
+            date_string = get_valid_input("Date (d/m/yyyy): ")
+            datetime.datetime.strptime(date_string, "%d/%m/%Y")
+        except ValueError:
+            print("Incorrect date format")
+        else:
+            correct_date = True
+            is_valid_input = False
+            while not is_valid_input:
+                try:
+                    priority = int(get_valid_input("Priority: "))
+                    while priority <= 0:
+                        print("Enter 1 or more")
+                        priority = int(get_valid_input("Priority: "))
+                    cost = float(get_valid_input("Cost estimate: $"))
+                    while cost < 0:
+                        print("Enter 0 or more")
+                        cost = float(get_valid_input("Cost estimate: $"))
+                    completion = int(get_valid_input("Percent complete: "))
+                    while 0 < completion > 100:
+                        print("Enter 0 to 100")
+                        completion = int(get_valid_input("Percent complete: "))
+                    else:
+                        is_valid_input = True
+                        parts = [name, date_string, priority, cost, completion]
+                        texts.append(parts)
+                        project = Project(parts[0], parts[1], parts[2], parts[3], parts[4])
+                        projects.append(project)
+                except ValueError:
+                    print("Invalid input")
+
+
+def get_valid_input(prompt):
+    """Get valid input"""
+    variable = input(prompt)
+    while variable == '' or variable.isspace():
+        print("Input cannot be empty")
+        variable = input(prompt)
+    return variable
 
 
 def filter_projects(projects, texts):
-    """show projects after date"""
-    filter_date = input("Show projects that start after date (dd/mm/yy): ")
-    filtered_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
-    for i in range(len(texts)):
-        start_date = datetime.datetime.strptime(texts[i][1], "%d/%m/%Y").date()
-        if start_date >= filtered_date:
-            print(projects[i])
+    """Show projects after date"""
+    # filter_date = get_valid_input("Show projects that start after date (dd/mm/yy): ")
+    correct_date = False
+    while not correct_date:
+        try:
+            filter_date = get_valid_input("Show projects that start after date (dd/mm/yy): ")
+            datetime.datetime.strptime(filter_date, "%d/%m/%Y")
+        except ValueError:
+            print("Incorrect date format")
+        else:
+            correct_date = True
+            filtered_date = datetime.datetime.strptime(filter_date, "%d/%m/%Y").date()
+            projects.sort()
+            for i in range(len(projects)):
+                start_date = datetime.datetime.strptime(texts[i][1], "%d/%m/%Y").date()
+                if filtered_date >= start_date:
+                    print(projects[i])
 
 
 def save_file(header, texts):
+    """Save file"""
     with open("projected.txt", 'w') as out_file:
         out_file.write(header)
         for i in range(len(texts)):
@@ -99,6 +144,7 @@ def save_file(header, texts):
 
 
 def load_project(texts, projects):
+    """Load file"""
     with open("projects.txt") as in_file:
         header = next(in_file)
         for part in in_file:
@@ -117,6 +163,7 @@ def load_project(texts, projects):
 
 
 def display_projects(projects):
+    """Display and separate projects into incomplete projects and complete projects"""
     print("Incomplete projects:")
     for part in projects:
         if Project.is_not_complete(part):
@@ -128,31 +175,3 @@ def display_projects(projects):
 
 
 main()
-
-# print(MENU)
-# projects = []
-# texts = []
-
-# with open("projects.txt") as in_file:
-#     header = next(in_file)
-#     for part in in_file:
-#         parts = part.split()
-#         parts[:-4] = [' '.join(parts[:-4])]
-#         texts.append(parts)
-#         project = Project(parts[0], parts[1], int(parts[2]), float(parts[3]), float(parts[4]))
-#         projects.append(project)
-#
-# for i in range(len(texts)):
-#     texts[i][2] = int(texts[i][2])
-#     texts[i][3] = float(texts[i][3])
-#     texts[i][4] = int(texts[i][4])
-#
-# print(texts)
-
-
-#
-
-#
-
-
-# Project(projects[0], projects[1], projects[2], projects[3], projects[4])
