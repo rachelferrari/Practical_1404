@@ -9,7 +9,6 @@ KILOMETRES_IN_MILES = 1.60934
 class ConvertMilesToKmApp(App):
     """ConvertMilestoKmApp is a Kivy App for converting miles (input) into kilometres (output)"""
     result = StringProperty()
-    new_number = StringProperty()
 
     def build(self):
         """ built the Kivy app for the kv file """
@@ -18,26 +17,23 @@ class ConvertMilesToKmApp(App):
         self.root = Builder.load_file('convert_miles_km.kv')
         return self.root
 
-    def handle_calculation(self, value):
+    def handle_calculation(self):
         """ handle calculation, output result to label widget"""
-        try:
-            self.result = str(float(value) * KILOMETRES_IN_MILES)
-        except ValueError:
-            pass
+        value = self.handle_invalid()
+        self.result = str(value * KILOMETRES_IN_MILES)
 
-    def handle_increment(self, input_number, increment):
+    def handle_increment(self, increment):
         """ handle increase or decrease of inputted number for calculation """
-        try:
-            self.new_number = str(float(input_number) + increment)
-        except ValueError:
-            pass
+        value = self.handle_invalid()
+        self.root.ids.input_number.text = str(value + increment)
 
-    def handle_invalid(self, input_number):
+    def handle_invalid(self):
         """ handle invalid inputs"""
         try:
-            self.new_number = str(float(input_number))
+            value = float(self.root.ids.input_number.text)
+            return value
         except ValueError:
-            self.new_number = str(0.0)
+            return 0.0
 
 
 ConvertMilesToKmApp().run()
