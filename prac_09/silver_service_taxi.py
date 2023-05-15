@@ -20,8 +20,3 @@ class SilverServiceTaxi(Taxi):
         """Return the price for the taxi trip."""
         final_fare = super().get_fare() + self.flagfall
         return final_fare
-
-    def drive(self, distance):
-        """Drive like parent Car but calculate fare distance as well."""
-        return super().drive(distance)
-
