@@ -47,19 +47,13 @@ def choose_taxi(current_taxi, taxis):
     print("Taxis available: ")
     for i, taxi in enumerate(taxis):
         print(f"{i} - {taxi}")
-    is_valid_input = False
-    while not is_valid_input:
-        try:
-            taxi_choice = int(input("Choose taxi: "))
-            if taxi_choice < 0:
-                print(f"Enter number between 0 - {len(taxis)}")
-            elif taxi_choice >= len(taxis):
-                print("Invalid taxi choice")
-            else:
-                is_valid_input = True
-                current_taxi = taxis[taxi_choice]
-        except ValueError:
-            print("Enter an integer")
+    taxi_choice = int(input("Choose taxi: "))
+    if taxi_choice < 0:
+        print(f"Enter number between 0 - {len(taxis)}")
+    elif taxi_choice >= len(taxis):
+        print("Invalid taxi choice")
+    else:
+        current_taxi = taxis[taxi_choice]
     return current_taxi
 
 
