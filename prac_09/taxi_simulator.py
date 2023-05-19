@@ -26,6 +26,10 @@ def main():
         print(f"Bill to date: ${float(total_bill):.2f}")
         print(MENU)
         choice = input(">>> ").lower()
+    print(f"Total trip cost: ${float(total_bill):.2f}")
+    print("Taxis are now:")
+    for i, taxi in enumerate(taxis):
+        print(f"{i} - {taxi}")
 
 
 def drive_taxi(current_taxi):
