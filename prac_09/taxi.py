@@ -2,8 +2,6 @@
 CP1404/CP5632 Practical
 Car class
 """
-from math import ceil
-
 from car import Car
 
 
